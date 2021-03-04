@@ -1,0 +1,27 @@
+{
+    'presets': [
+  		'env',
+  		'react',
+    ],
+    'plugins': [
+      [
+        'import',
+        {
+          'libraryName': 'antd',
+          'style': 'css'
+        }
+      ],
+      [
+        'transform-runtime',
+        {
+          'helpers': false,
+          'polyfill': false,
+          'regenerator': true,
+          'moduleName': 'babel-runtime'
+        }
+      ],
+      'syntax-dynamic-import',
+      'transform-object-rest-spread',
+      'transform-class-properties'
+    ]
+}
