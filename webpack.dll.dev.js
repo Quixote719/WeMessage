@@ -1,13 +1,6 @@
 const webpack = require('webpack')
 
-const vendors = [
-    'react',
-    'react-dom',
-    'react-router-dom',
-    'redux',
-    'react-redux',
-    'antd'
-]
+const vendors = ['react', 'react-dom', 'react-router-dom', 'antd']
 
 module.exports = {
     output: {

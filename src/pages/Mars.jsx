@@ -1,12 +1,14 @@
 import React from 'react'
 import styles from './app.less'
-import { Skeleton } from 'antd'
+import MessagePanel from './component/messagePanel'
+import ChatBox from './component/chatBox'
+
 class App extends React.Component {
     render() {
         return (
-            <div className={styles.App}>
-                <p className={styles.appIntro}>welcome to Mars</p>
-                <Skeleton />
+            <div className={styles.msgWindow}>
+                <MessagePanel />
+                <ChatBox />
             </div>
         )
     }
