@@ -8,7 +8,7 @@ export default function ChatBox(props) {
     // 默认textarea的最高行数
     // const [defaultMaxRows] = useState(5)
 
-    const [rows, setRows] = useState(1)
+    // const [rows, setRows] = useState(1)
 
     // const hiddenTextarea = useRef(null)
 
@@ -42,7 +42,7 @@ export default function ChatBox(props) {
 
     function onChange(e) {
         // console.log('onchange', e.target.value)
-        console.warn('setRows', setRows)
+        // console.warn('setRows', setRows)
         setContent(e.target.value)
     }
 
@@ -68,7 +68,7 @@ export default function ChatBox(props) {
                 <TextArea
                     spellCheck={false}
                     placeholder='输入聊天内容...'
-                    rows={rows}
+                    autoSize={true}
                     value={content}
                     onChange={onChange}
                     onBlur={onBlur}
