@@ -34,15 +34,16 @@ export default function ChatBox(props) {
     // 发送消息
     function sendMessage() {
         // 调用接口发送消息
+        const { sendMsgCallBack } = props
         props.sendMessage && props.sendMessage()
-
         // 发送成功后
+        if (typeof sendMsgCallBack === 'function') {
+            sendMsgCallBack(content)
+        }
         setContent('')
     }
 
     function onChange(e) {
-        // console.log('onchange', e.target.value)
-        // console.warn('setRows', setRows)
         setContent(e.target.value)
     }
 

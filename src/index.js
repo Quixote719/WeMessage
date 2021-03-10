@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
-import Mars from './pages/Mars'
+import MessageWindow from './pages/messageWindow'
 const temp = module
 if (temp.hot) {
     temp.hot.accept()
@@ -12,7 +12,7 @@ class App extends React.PureComponent {
         return (
             <Router>
                 <div>
-                    <Mars />
+                    <MessageWindow />
                     {/* <Switch>
                             <Route path='/weMessage' component={Mars} />
                         </Switch> */}
