@@ -30,10 +30,6 @@ module.exports = {
                 loader: 'babel-loader'
             },
             {
-                test: /\.(sass|scss)$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
-            },
-            {
                 test: /\.less$/,
                 use: [
                     'style-loader',
@@ -44,6 +40,28 @@ module.exports = {
             {
                 test: /\.(css)$/,
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.svg$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            encoding: 'utf8'
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif|jfif)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192 // 限制为8k，小于就会base64
+                        }
+                    }
+                ]
             }
         ]
     }

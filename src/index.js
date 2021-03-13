@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { Provider } from 'mobx-react'
+import store from './store/rootStore'
 import MessageWindow from './pages/messageWindow'
 const temp = module
 if (temp.hot) {
@@ -10,14 +12,16 @@ if (temp.hot) {
 class App extends React.PureComponent {
     render() {
         return (
-            <Router>
-                <div>
-                    <MessageWindow />
-                    {/* <Switch>
+            <Provider {...store}>
+                <Router>
+                    <div>
+                        <MessageWindow />
+                        {/* <Switch>
                             <Route path='/weMessage' component={Mars} />
                         </Switch> */}
-                </div>
-            </Router>
+                    </div>
+                </Router>
+            </Provider>
         )
     }
 }
