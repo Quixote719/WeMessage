@@ -5,58 +5,95 @@ import { LinkOutlined } from '@ant-design/icons'
 import styles from './index.less'
 
 const MessagePanel = props => {
-    const renderTextMsg = params => {
-        console.warn(90)
-        return (
-            <div className={styles.messageBlock}>
-                <ProfileBlock />
+    const renderTextMsg = (content, sender) => {
+        const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
+            profile = <ProfileBlock />,
+            messageBox = (
                 <div className={styles.messageContent}>
-                    <MessagePop message={params} />
+                    <MessagePop message={content} />
                 </div>
+            ),
+            msgContent =
+                sender === 'host'
+                    ? [messageBox, profile]
+                    : [profile, messageBox]
+        return (
+            <div
+                className={styles.messageBlock}
+                style={{ justifyContent: elementPosition }}
+            >
+                {msgContent}
             </div>
         )
     }
 
-    const renderImageMsg = params => {
-        return (
-            <div className={styles.messageBlock}>
-                <ProfileBlock />
+    const renderImageMsg = (content, sender) => {
+        const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
+            profile = <ProfileBlock />,
+            messageBox = (
                 <div className={styles.messageContent}>
-                    <img className={styles.imageSquare} src={params} />
+                    <img className={styles.imageSquare} src={content} />
                 </div>
+            ),
+            msgContent =
+                sender === 'host'
+                    ? [messageBox, profile]
+                    : [profile, messageBox]
+        return (
+            <div
+                className={styles.messageBlock}
+                style={{ justifyContent: elementPosition }}
+            >
+                {/* <ProfileBlock />
+                <div className={styles.messageContent}>
+                    <img className={styles.imageSquare} src={content} />
+                </div> */}
+                {msgContent}
             </div>
         )
     }
 
-    const renderLinkMsg = params => {
-        console.warn('renderLinkMsg', params)
-        return (
-            <div className={styles.messageBlock}>
-                <ProfileBlock />
+    const renderLinkMsg = (content, sender) => {
+        const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
+            profile = <ProfileBlock />,
+            messageBox = (
                 <div className={styles.messageContent}>
                     <div
-                        onClick={() => window.open(params)}
+                        onClick={() => window.open(content)}
                         className={styles.messageLinkSquare}
                     >
                         <LinkOutlined />
-                        <span className={styles.messageLink}>{params}</span>
+                        <span className={styles.messageLink}>{content}</span>
                     </div>
                 </div>
+            ),
+            msgContent =
+                sender === 'host'
+                    ? [messageBox, profile]
+                    : [profile, messageBox]
+        return (
+            <div
+                className={styles.messageBlock}
+                style={{ justifyContent: elementPosition }}
+            >
+                {msgContent}
             </div>
         )
     }
+
+    const msgTypeMap = {
+        text: renderTextMsg,
+        image: renderImageMsg,
+        link: renderLinkMsg
+    }
+
     const mapMessage = () => {
         const { messageFlow } = props
-        let msgTypeMap = {
-            text: renderTextMsg,
-            image: renderImageMsg,
-            link: renderLinkMsg
-        }
         return messageFlow.map((item, index) => {
             return (
                 <div key={index}>
                     {typeof msgTypeMap[item.type] === 'function'
-                        ? msgTypeMap[item.type](item[item.type])
+                        ? msgTypeMap[item.type](item[item.type], item.sender)
                         : null}
                 </div>
             )

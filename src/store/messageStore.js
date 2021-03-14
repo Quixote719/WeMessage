@@ -1,20 +1,24 @@
 import { action, makeAutoObservable, observable } from 'mobx'
 import hexagonIcon from '/src/assets/hexagon.svg'
 class MessageStore {
-    messageFlow = [
-        { type: 'text', text: 'Hi there' },
-        { type: 'image', image: hexagonIcon },
-        { type: 'link', link: 'https://www.zhihu.com' }
-    ]
     constructor() {
         makeAutoObservable(this, {
-            message: observable,
+            messageFlow: observable,
             updateMessage: action
         })
     }
 
+    messageFlow = [
+        { type: 'text', text: 'Hi there', sender: 'host' },
+        { type: 'image', image: hexagonIcon, sender: 'guest' },
+        { type: 'link', link: 'https://www.zhihu.com', sender: 'host' }
+    ]
+
     updateMessage = params => {
-        this.message.push(params)
+        let updateMsgFlow = [...this.messageFlow]
+        updateMsgFlow.push(params)
+        this.messageFlow = updateMsgFlow
+        // console.warn('updateMessage', this.messageFlow)
     }
 }
 
