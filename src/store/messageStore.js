@@ -11,7 +11,12 @@ class MessageStore {
     messageFlow = [
         { type: 'text', text: 'Hi there', sender: 'host' },
         { type: 'image', image: hexagonIcon, sender: 'guest' },
-        { type: 'link', link: 'https://www.zhihu.com', sender: 'host' }
+        { type: 'link', link: 'https://www.zhihu.com', sender: 'host' },
+        {
+            type: 'systemMsg',
+            systemMsg: '您以添加Louis，现在可以开始聊天了',
+            sender: 'system'
+        }
     ]
 
     updateMessage = params => {

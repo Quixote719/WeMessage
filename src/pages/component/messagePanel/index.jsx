@@ -1,90 +1,31 @@
 import React from 'react'
-import ProfileBlock from '../profileBlock'
-import MessagePop from '../messagePop'
-import { LinkOutlined } from '@ant-design/icons'
+import TextMessage from '../messageType/textMessage'
+import ImageMessage from '../messageType/imageMessage'
+import LinkMessage from '../messageType/linkMessage'
+import SystemMessage from '../messageType/systemMessage'
 import styles from './index.less'
 
 const MessagePanel = props => {
-    const renderTextMsg = (content, sender) => {
-        const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
-            profile = <ProfileBlock />,
-            messageBox = (
-                <div className={styles.messageContent}>
-                    <MessagePop message={content} />
-                </div>
-            ),
-            msgContent =
-                sender === 'host'
-                    ? [messageBox, profile]
-                    : [profile, messageBox]
-        return (
-            <div
-                className={styles.messageBlock}
-                style={{ justifyContent: elementPosition }}
-            >
-                {msgContent}
-            </div>
-        )
+    const renderTextMsg = (message, sender) => {
+        return <TextMessage message={message} sender={sender} />
     }
 
-    const renderImageMsg = (content, sender) => {
-        const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
-            profile = <ProfileBlock />,
-            messageBox = (
-                <div className={styles.messageContent}>
-                    <img className={styles.imageSquare} src={content} />
-                </div>
-            ),
-            msgContent =
-                sender === 'host'
-                    ? [messageBox, profile]
-                    : [profile, messageBox]
-        return (
-            <div
-                className={styles.messageBlock}
-                style={{ justifyContent: elementPosition }}
-            >
-                {/* <ProfileBlock />
-                <div className={styles.messageContent}>
-                    <img className={styles.imageSquare} src={content} />
-                </div> */}
-                {msgContent}
-            </div>
-        )
+    const renderImageMsg = (message, sender) => {
+        return <ImageMessage message={message} sender={sender} />
     }
 
-    const renderLinkMsg = (content, sender) => {
-        const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
-            profile = <ProfileBlock />,
-            messageBox = (
-                <div className={styles.messageContent}>
-                    <div
-                        onClick={() => window.open(content)}
-                        className={styles.messageLinkSquare}
-                    >
-                        <LinkOutlined />
-                        <span className={styles.messageLink}>{content}</span>
-                    </div>
-                </div>
-            ),
-            msgContent =
-                sender === 'host'
-                    ? [messageBox, profile]
-                    : [profile, messageBox]
-        return (
-            <div
-                className={styles.messageBlock}
-                style={{ justifyContent: elementPosition }}
-            >
-                {msgContent}
-            </div>
-        )
+    const renderLinkMsg = (message, sender) => {
+        return <LinkMessage message={message} sender={sender} />
     }
 
+    const renderSystemMessage = (message, sender) => {
+        return <SystemMessage message={message} sender={sender} />
+    }
     const msgTypeMap = {
         text: renderTextMsg,
         image: renderImageMsg,
-        link: renderLinkMsg
+        link: renderLinkMsg,
+        systemMsg: renderSystemMessage
     }
 
     const mapMessage = () => {
@@ -100,17 +41,7 @@ const MessagePanel = props => {
         })
     }
 
-    return (
-        <div className={styles.msgPanel}>
-            {/* <ProfileBlock />
-            <MessagePop
-                message={
-                    'We are not now that strength which in old days. Moved earth and heaven, that which we are One equal temper of heroic hearts, made weak by time and fate, but strong in will to strive, to seek, to find, and not to yield.'
-                }
-            /> */}
-            {mapMessage()}
-        </div>
-    )
+    return <div className={styles.msgPanel}>{mapMessage()}</div>
 }
 
 export default MessagePanel
