@@ -1,5 +1,6 @@
 import { action, makeAutoObservable, observable } from 'mobx'
-import hexagonIcon from '/src/assets/hexagon.svg'
+import { msgMock1 } from '/src/mock/msgFlowMock'
+
 class MessageStore {
     constructor() {
         makeAutoObservable(this, {
@@ -8,22 +9,13 @@ class MessageStore {
         })
     }
 
-    messageFlow = [
-        { type: 'text', text: 'Hi there', sender: 'host' },
-        { type: 'image', image: hexagonIcon, sender: 'guest' },
-        { type: 'link', link: 'https://www.zhihu.com', sender: 'host' },
-        {
-            type: 'systemMsg',
-            systemMsg: '您以添加Louis，现在可以开始聊天了',
-            sender: 'system'
-        }
-    ]
+    //消息流的初始值设定为已写好的mock测试数据，可通过更改对应mock数据，查看不同消息流的渲染效果
+    messageFlow = msgMock1
 
     updateMessage = params => {
         let updateMsgFlow = [...this.messageFlow]
         updateMsgFlow.push(params)
         this.messageFlow = updateMsgFlow
-        // console.warn('updateMessage', this.messageFlow)
     }
 }
 

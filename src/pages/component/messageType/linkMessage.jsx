@@ -1,3 +1,6 @@
+/*
+ * 链接消息组件
+ */
 import React from 'react'
 import ProfileBlock from '../profileBlock'
 import { LinkOutlined } from '@ant-design/icons'
@@ -6,7 +9,7 @@ import styles from './index.less'
 const LinkMessage = props => {
     const { message, sender } = props
     const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
-        profile = <ProfileBlock />,
+        profile = <ProfileBlock sender={sender} />,
         messageBox = (
             <div className={styles.messageContent}>
                 <div

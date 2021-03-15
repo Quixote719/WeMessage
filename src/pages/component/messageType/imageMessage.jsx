@@ -5,7 +5,7 @@ import styles from './index.less'
 const ImageMessage = props => {
     const { message, sender } = props
     const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
-        profile = <ProfileBlock />,
+        profile = <ProfileBlock sender={sender} />,
         messageBox = (
             <div className={styles.messageContent}>
                 <img className={styles.imageSquare} src={message} />

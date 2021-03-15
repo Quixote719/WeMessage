@@ -1,3 +1,6 @@
+/*
+ * 消息显示面板组件
+ */
 import React from 'react'
 import TextMessage from '../messageType/textMessage'
 import ImageMessage from '../messageType/imageMessage'
@@ -21,6 +24,8 @@ const MessagePanel = props => {
     const renderSystemMessage = (message, sender) => {
         return <SystemMessage message={message} sender={sender} />
     }
+
+    // 确立消息类型与消息渲染函数映射的常量
     const msgTypeMap = {
         text: renderTextMsg,
         image: renderImageMsg,

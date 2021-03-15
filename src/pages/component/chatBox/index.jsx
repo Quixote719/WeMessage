@@ -1,42 +1,20 @@
 import React, { useState, useMemo } from 'react'
 import { Input, Button } from 'antd'
+import styles from './index.less'
 
 const { TextArea } = Input
 export default function ChatBox(props) {
     const [content, setContent] = useState('')
 
-    // 默认textarea的最高行数
-    // const [defaultMaxRows] = useState(5)
-
-    // const [rows, setRows] = useState(1)
-
-    // const hiddenTextarea = useRef(null)
-
-    // const maxRows = useMemo(() => props.maxRows || defaultMaxRows, [
-    //     props.maxRows
-    // ])
-
-    //   useEffect(() => {
-    //     return () => {
-    //       let r = hiddenTextarea.current.scrollHeight / hiddenTextarea.current.clientHeight
-    //       if (r > maxRows) r = maxRows
-    //       setRows(r)
-    //     }
-    //   }, [maxRows, content])
-
-    // 用户输入内容是否可以发送
-    // 去除输入内容的收尾两端空格
     const disable = useMemo(
         () => content.replace(/(^\s+)|(\s+$)/g, '') === '',
         [content]
     )
 
-    // 发送消息
+    // 发送消息函数
     function sendMessage() {
-        // 调用接口发送消息
+        // 执行父组件传入的发送消息函数
         const { sendMsgCallBack } = props
-        props.sendMessage && props.sendMessage()
-        // 发送成功后
         if (typeof sendMsgCallBack === 'function') {
             sendMsgCallBack(content)
         }
@@ -47,45 +25,18 @@ export default function ChatBox(props) {
         setContent(e.target.value)
     }
 
-    function onBlur() {
-        // 键盘收起
-        setTimeout(() => {
-            // safari on ios9 一下不支持window.scrollTo 好在这个兼容性问题出现在ios12的微信里
-            window.scrollTo && window.scrollTo(0, 99999999)
-        }, 100)
-    }
-
-    function onFocus() {
-        // 键盘弹出
-        setTimeout(() => {
-            // safari on ios9 一下不支持window.scrollTo 好在这个兼容性问题出现在ios12的微信里
-            window.scrollTo && window.scrollTo(0, 99999999)
-        }, 100)
-    }
-
     return (
-        <div className='m-input-area__wrapper'>
-            <div className='m-input-area__content'>
-                <TextArea
-                    spellCheck={false}
-                    placeholder='输入聊天内容...'
-                    autoSize={true}
-                    value={content}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
-                />
-
-                {/* 不可见的输入框 */}
-                {/* <TextArea readOnly rows={1} value={content} ref={hiddenTextarea} /> */}
+        <div>
+            <div className={styles.chatBoxBar}>
+                <TextArea autoSize={true} value={content} onChange={onChange} />
+                <Button
+                    type={'primary'}
+                    disabled={disable}
+                    onClick={sendMessage}
+                >
+                    发送
+                </Button>
             </div>
-            <Button
-                className={`m-input-area__btn ${disable ? 'disable' : ''}`}
-                disabled={disable}
-                onClick={sendMessage}
-            >
-                发送
-            </Button>
         </div>
     )
 }
