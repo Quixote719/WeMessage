@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from './app.less'
+import WindowHeader from './component/windowHeader'
 import MessagePanel from './component/messagePanel'
-import { observer, inject } from 'mobx-react'
 import ChatBox from './component/chatBox'
+import { observer, inject } from 'mobx-react'
 
 class App extends React.Component {
     sendMsg = params => {
@@ -18,6 +19,7 @@ class App extends React.Component {
         const { messageFlow } = messageStore
         return (
             <div className={styles.msgWindow}>
+                <WindowHeader name={'Doge'} />
                 <MessagePanel messageFlow={messageFlow} />
                 <ChatBox sendMsgCallBack={params => this.sendMsg(params)} />
             </div>
