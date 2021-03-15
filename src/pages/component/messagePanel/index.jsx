@@ -2,10 +2,10 @@
  * 消息显示面板组件
  */
 import React from 'react'
-import TextMessage from '../messageType/textMessage'
-import ImageMessage from '../messageType/imageMessage'
-import LinkMessage from '../messageType/linkMessage'
-import SystemMessage from '../messageType/systemMessage'
+import TextMessage from './messageType/textMessage'
+import ImageMessage from './messageType/imageMessage'
+import LinkMessage from './messageType/linkMessage'
+import SystemMessage from './messageType/systemMessage'
 import styles from './index.less'
 
 const MessagePanel = props => {

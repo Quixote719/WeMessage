@@ -9,9 +9,9 @@ import styles from './index.less'
 const LinkMessage = props => {
     const { message, sender } = props
     const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
-        profile = <ProfileBlock sender={sender} />,
+        profile = <ProfileBlock key={'profile'} sender={sender} />,
         messageBox = (
-            <div className={styles.messageContent}>
+            <div key={'linkMessage'} className={styles.messageContent}>
                 <div
                     onClick={() => window.open(message)}
                     className={styles.messageLinkSquare}

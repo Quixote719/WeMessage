@@ -9,9 +9,9 @@ import styles from './index.less'
 const TextMessage = props => {
     const { message, sender } = props
     const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
-        profile = <ProfileBlock sender={sender} />,
+        profile = <ProfileBlock key={'profile'} sender={sender} />,
         messageBox = (
-            <div className={styles.messageContent}>
+            <div key={'textMessage'} className={styles.messageContent}>
                 <MessagePop message={message} sender={sender} />
             </div>
         ),

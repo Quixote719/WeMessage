@@ -1,3 +1,6 @@
+/*
+ * 图片消息组件
+ */
 import React from 'react'
 import ProfileBlock from '../profileBlock'
 import styles from './index.less'
@@ -5,9 +8,9 @@ import styles from './index.less'
 const ImageMessage = props => {
     const { message, sender } = props
     const elementPosition = sender === 'host' ? 'flex-end' : 'flex-start',
-        profile = <ProfileBlock sender={sender} />,
+        profile = <ProfileBlock key={'profile'} sender={sender} />,
         messageBox = (
-            <div className={styles.messageContent}>
+            <div key={'imageMessage'} className={styles.messageContent}>
                 <img className={styles.imageSquare} src={message} />
             </div>
         ),
